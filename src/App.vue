@@ -1,12 +1,13 @@
 <template>
   <Toolbar class="nav">
     <template #start>
-      <Button label="Iniciar sesion" icon="pi pi-user" class="mr-2" @click="route(1)"/>
-      <Button label="Registrarse" icon="pi pi-plus"  class="p-button-success" @click="route(2)"/>
+      <Button v-if="id === 0" label="Iniciar sesion" icon="pi pi-user" class="mr-2" @click="route(1)"/>
+      <Button v-if="id === 0" label="Registrarse" icon="pi pi-plus"  class="p-button-success" @click="route(2)"/>
     </template>
 
     <template #end>
-      <Button icon="pi pi-times" class="p-button-danger" label="Cerrar sesion" />
+      <Button v-if="id !== 0" :label="username" icon="pi pi-user" class="p-button-rounded p-button-secondary mr-2" />
+      <Button v-if="id !== 0" @click="closeSesion" icon="pi pi-times" class="p-button-danger p-button-rounded" label="Cerrar sesion" />
     </template>
   </Toolbar>
 <!--  <nav>
@@ -17,11 +18,16 @@
 </template>
 
 <script>
-
 import router from "@/router";
+import {mapState} from "vuex";
+import store from "@/store";
 
 export default {
   setup() {
+    const closeSesion = () => {
+      store.commit('logOut')
+      router.push('/')
+    }
     const route = (type) => {
       if (type === 1) {
         router.push('/')
@@ -33,8 +39,12 @@ export default {
     }
 
     return {
+      closeSesion,
       route,
     }
+  },
+  computed: {
+    ...mapState(['username', 'password', 'id'])
   }
 }
 

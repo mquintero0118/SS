@@ -4,7 +4,7 @@
       <template #header>
       </template>
       <template #title>
-        Vamos a crear tu cuenta!
+        Vamos a entrar a tu cuenta!
       </template>
       <template #subtitle>
         Porfavor llena estos datos
@@ -16,11 +16,11 @@
         <br>
         <label for="username">Contraseña</label> <br>
         <InputText v-model="frmRegister.password" type="password" class="mt-2" />
+        <h2 v-for="user in usuarios.users" :key="user">{{user}}</h2>
       </template>
       <template #footer>
-        <Button icon="pi pi-user-plus" label="Ya tengo cuenta" class="p-button-secondary"  />
-        <Button @click="register" icon="pi pi-users" label="Crear cuenta" style="margin-left: .5em" :disabled="frmRegister.password === '' || frmRegister.username === ''" />
-
+        <Button icon="pi pi-user-plus" label="No tengo cuenta" class="p-button-secondary"  />
+        <Button @click="login" icon="pi pi-users" label="Iniciar sesion" style="margin-left: .5em" :disabled="frmRegister.password === '' || frmRegister.username === ''" />
       </template>
     </Card>
   </div>
@@ -30,16 +30,41 @@
 <script>
 /* eslint-disable vue/multi-word-component-names */
 import {onMounted, ref} from "vue";
+import users from '/users.json'
+import store from "@/store";
+import router from "@/router";
+// import axios from "axios";
 
 export default {
   name: "Login",
   setup() {
+    let usuarios = users
     const frmRegister = ref({
       username: "",
       password: "",
+      id: 0,
     })
 
-    const register = () => {
+    const login = () => {
+      let existe = false
+      usuarios.users.forEach((element) => {
+        if (element.username === frmRegister.value.username && element.password === frmRegister.value.password) {
+          console.log(element)
+          frmRegister.value.username = element.username
+          frmRegister.value.password = element.password
+          frmRegister.value.id = element.id
+          alert('Sesion iniciada con exito!')
+          existe = true
+        }
+      })
+      if (existe) {
+        store.commit('setUser', frmRegister.value)
+        setTimeout(() => {
+          router.push('/Reportes')
+        })
+      } else {
+        alert('Ya existe el usuario')
+      }
     }
 
     onMounted(() => {
@@ -48,7 +73,8 @@ export default {
     })
     return {
       frmRegister,
-      register
+      login,
+      usuarios,
     }
   }
 }
