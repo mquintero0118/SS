@@ -16,11 +16,11 @@
         <br>
         <label for="username">Contraseña</label> <br>
         <InputText v-model="frmRegister.password" type="password" class="mt-2" />
-        <h2 v-for="user in usuarios.users" :key="user">{{user}}</h2>
       </template>
       <template #footer>
         <Button icon="pi pi-user-plus" label="No tengo cuenta" class="p-button-secondary"  />
         <Button @click="login" icon="pi pi-users" label="Iniciar sesion" style="margin-left: .5em" :disabled="frmRegister.password === '' || frmRegister.username === ''" />
+
       </template>
     </Card>
   </div>

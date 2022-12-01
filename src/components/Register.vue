@@ -16,7 +16,6 @@
         <br>
         <label for="username">Contraseña</label> <br>
         <InputText v-model="frmRegister.password" type="password" class="mt-2" />
-        <h2 v-for="user in usuarios.users" :key="user">{{user}}</h2>
       </template>
       <template #footer>
         <Button icon="pi pi-user-plus" label="Ya tengo cuenta" class="p-button-secondary"  />
@@ -55,6 +54,7 @@ export default {
         frmRegister.value.id = lastElement.id + 1
         axios.post('http://localhost:3000/users', frmRegister.value).then((response) => {
           console.log(response)
+          alert('Usuario creado con exito!')
         })
       } else {
         alert('Ya existe el usuario')

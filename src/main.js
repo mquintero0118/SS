@@ -9,6 +9,8 @@ import Button from 'primevue/button';
 import Toolbar from 'primevue/toolbar';
 import Card from 'primevue/card';
 import InputText from 'primevue/inputtext';
+import RadioButton from 'primevue/radiobutton';
+import Calendar from 'primevue/calendar';
 
 
 import 'primevue/resources/themes/saga-blue/theme.css'       //theme
@@ -27,5 +29,7 @@ app.component('Button', Button);
 app.component('Toolbar', Toolbar);
 app.component('Card', Card);
 app.component('InputText', InputText);
+app.component('RadioButton', RadioButton);
+app.component('Calendar', Calendar);
 
 app.mount('#app')

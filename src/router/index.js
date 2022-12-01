@@ -24,6 +24,16 @@ const routes = [
     path: '/Reportes',
     name: 'Reportes',
     component: () => import('../components/Reportes')
+  },
+  {
+    path: '/AltaLabDev',
+    name: 'AltaLabDev',
+    component: () => import('../components/AltaLabDep')
+  },
+  {
+    path: '/CrearEquipo',
+    name: 'CrearEquipo',
+    component: () => import('../components/CrearEquipo')
   }
 ]
 

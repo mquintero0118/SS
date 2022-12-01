@@ -3,6 +3,9 @@
     <template #start>
       <Button v-if="id === 0" label="Iniciar sesion" icon="pi pi-user" class="mr-2" @click="route(1)"/>
       <Button v-if="id === 0" label="Registrarse" icon="pi pi-plus"  class="p-button-success" @click="route(2)"/>
+      <Button v-if="id !== 0" label="Crear Laboratorio/Departamento" icon="pi pi-plus"  class="p-button-success mr-2" @click="route(3)"/>
+      <Button v-if="id !== 0" label="Crear Equipo" icon="pi pi-plus"  class="p-button-info mr-2" @click="route(4)"/>
+      <Button v-if="id !== 0" label="Ver Reportes" icon="pi pi-file-word"  class="p-button-warning" @click="route(5)" style="color: white"/>
     </template>
 
     <template #end>
@@ -34,6 +37,12 @@ export default {
       }
       if (type === 2) {
         router.push('/Register')
+      }
+      if (type === 3) {
+        router.push('/AltaLabDev')
+      }
+      if (type === 4) {
+        router.push('/CrearEquipo')
       }
 
     }
