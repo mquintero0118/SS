@@ -1,12 +1,60 @@
 <template>
-  <nav>
+  <Toolbar class="nav">
+    <template #start>
+      <Button label="Iniciar sesion" icon="pi pi-user" class="mr-2" @click="route(1)"/>
+      <Button label="Registrarse" icon="pi pi-plus"  class="p-button-success" @click="route(2)"/>
+    </template>
+
+    <template #end>
+      <Button icon="pi pi-times" class="p-button-danger" label="Cerrar sesion" />
+    </template>
+  </Toolbar>
+<!--  <nav>
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
-  </nav>
+  </nav>-->
   <router-view/>
 </template>
 
+<script>
+
+import router from "@/router";
+
+export default {
+  setup() {
+    const route = (type) => {
+      if (type === 1) {
+        router.push('/')
+      }
+      if (type === 2) {
+        router.push('/Register')
+      }
+
+    }
+
+    return {
+      route,
+    }
+  }
+}
+
+
+</script>
+
 <style>
+
+.nav {
+  background: rgba(79, 15, 28, 0.9) !important;
+  color: rgba(79, 15, 28, 0.9) !important;
+  border: rgba(79, 15, 28, 0.9) !important;
+  border-radius: 6px !important;
+  margin-left: 15% !important;
+  margin-right: 15% !important;
+}
+body{
+  background-color: #d2d2c9;
+
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -15,8 +63,8 @@
   color: #2c3e50;
 }
 
-nav {
-  padding: 30px;
+.nav {
+  color: #a79086
 }
 
 nav a {
